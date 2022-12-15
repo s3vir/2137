@@ -1,0 +1,82 @@
+25.11.2022
+#1.1
+
+create table kreatura select * from wikingowie.kreatura;
+
+create table zasob select * from wikingowie.zasob;
+
+create table ekwipunek select * from wikingowie.ekwipunek;
+
+
+#1.2
+select * from zasob;
+#1.3
+select * from zasob where rodzaj = 'jedzenie';
+
+#1.4
+select * from ekwipunek;
+
+select idZasobu, ilosc from ekwipunek where idKreatury in (1, 3, 5);
+
+#2.1
+select * from kreatura where rodzaj !='wiedzma' and udzwig >= 50;
+#2.2
+select * from zasob where waga between 2 and 5;
+#2.3
+select * from kreatura where nazwa Like "%or%" and udzwig between 30 and 70;
+
+----------------------------------------------------------------
+02.12.2022
+
+#3
+
+Select * from zasob;
+select dataPozyskania from zasob;
+select year(dataPozyskania) from zasob;
+select month(dataPozyskania) from zasob;
+select day(dataPozyskania) from zasob;
+
+select year(dataPozyskania), month(dataPozyskania), day(dataPozyskania) from zasob;
+select dataPozyskania, year(dataPozyskania), month(dataPozyskania), monthname(dataPozyskania), day(dataPozyskania) from zasob;
+
+#3.1
+select * from zasob where month(dataPozyskania) in (7,8);
+
+
+#3.2
+select rodzaj from zasob;
+select * from zasob where rodzaj is not null;
+
+select * from zasob where rodzaj is not null order by waga asc;
+
+#3.3 
+select * from kreatura order by dataUr limit 5;
+
+
+#4
+#4.1
+
+select distinct nazwa, dataPozyskania from zasob;
+select distinct(rodzaj) from zasob;
+
+#4.2
+#funkcja concat()
+
+select concat(nazwa," - ",rodzaj) as 'nazwa - rodzaj' from kreatura where rodzaj LIKE "wi%";
+
+#4.3
+select nazwa, ilosc * waga, dataPozyskania from zasob where year(dataPozyskania) between 2000 and 2007;
+
+#5
+#5.1
+
+select nazwa, (ilosc*waga)*0.7 as 'netto' , (ilosc*waga)*0.3 as 'odpadki' from zasob where rodzaj = 'jedzenie';
+
+
+#5.2
+
+select * from zasob where rodzaj is null;
+
+#5.3
+
+select distinct(nazwa), rodzaj from zasob where nazwa LIKE "ba%" or nazwa LIKE "%os" order by nazwa asc;
