@@ -7,14 +7,14 @@ select d.nazwa, count(p.id_pracownika)as ilosc_p from dzial d join pracownik p o
 #4-
 select k.nazwa_kategori, count(t.id_towaru) as ilosc_t from kategoria;
 #5*
-select k.nazwa_kategori, concat(t.nazwa_towaru)from kategoria k join towart t on t.kategoria=k.id_kategori group by k.id_kategori;
+select k.nazwa_kategori, concat(t.nazwa_towaru)from kategoria k join towar t on t.kategoria=k.id_kategori group by k.id_kategori;
 #6-
 select round(avg(pensja), 2)as sr_pensja from procownik;
 #7-
 select round (avg(pensja),2)as sr_pensja from pracownik where year(now())-year(data_zatrudnienia)>=5;
 #8*
 select t.nazwa_towaru, count(pz.towar)as ilosc from pozycja_zamowienia pz join towar t on pz.towar=t.id_towaru group by towar order by ilosc desc limit 10;
-#9
-select z.numer_zamowienia, sum(pz.cena) from pozycja_zamowienia pz where year(z.data_zamowienia)=2017  and month(z.data_zamowienia) between 1 and 3 group by zamowienie;
-#10
-select p.imie, p.nazwisko, sum(pz.ilosc*pz.cena) as wartosc from pracownik join zamowienie z on p.id_pracownika=z.pracownik_id_pracownika join pozycja_zamowienia pz on z.id_zamowienia=pz.zamowienie group by p.id_pracownika order by wartosc;
+#9*
+select z.numer_zamowienia, sum(pz.cena) from pozycja_zamowienia pz where year(z.data_zamowienia)=2017 and month(z.data_zamowienia) between 1 and 3 group by zamowienie;
+#10*
+select p.imie, p.nazwisko, sum(pz.ilosc*pz.cena) as wartosc from pracownik p join zamowienie z on p.id_pracownika=z.pracownik_id_pracownika join pozycja_zamowienia pz on z.id_zamowienia=pz.zamowienie group by p.id_pracownika order by wartosc desc;
